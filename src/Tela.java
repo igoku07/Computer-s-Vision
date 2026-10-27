@@ -1,90 +1,113 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Tela {
 
-    public static void main(String[] args){
-        //Janela Principal
-        JFrame janela = new JFrame("Visao Computacional");
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            // Janela principal
+            JFrame janela = new JFrame("Visao Computacional");
 
-        janela.setSize(600, 500);
-        janela.setLocationRelativeTo(null);
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            janela.setSize(600, 500);
+            janela.setLocationRelativeTo(null);
+            janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+            // Painel de cima
+            JPanel barraCima = new JPanel(new GridLayout(1, 2));
+            barraCima.setBackground(Color.WHITE);
 
-        //Paineil de cima
-        JPanel barraCima = new JPanel();
+            JButton abrir = new JButton("Abrir");
+            JButton salvar = new JButton("Salvar");
 
-        barraCima.setLayout(new GridLayout(1, 2));
-        barraCima.setBackground(Color.DARK_GRAY);
+            for (JButton botao : new JButton[]{abrir, salvar}) {
+                botao.setFont(new Font("Tahoma", Font.BOLD, 14));
+                botao.setBackground(new Color(240, 242, 246));
+                botao.setForeground(new Color(49, 51, 63));
 
-        JButton abrir = new JButton("Abrir");
+                botao.setContentAreaFilled(false);
+                botao.setOpaque(true);
 
-        JButton salvar = new JButton("Salvar");
+                botao.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(210, 214, 220)
+                        ),
+                        BorderFactory.createEmptyBorder(8, 18, 8, 18)
+                ));
 
-        for (JButton botao : new JButton[]{abrir, salvar}) {
-            botao.setFont(new Font("SansSerif", Font.BOLD, 14));
-            botao.setBackground(new Color(240, 242, 246));
-            botao.setForeground(new Color(49, 51, 63));
+                botao.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
 
-            botao.setContentAreaFilled(false); // Remove o efeito padrão
-            botao.setOpaque(true);            // Mostra a cor de fundo
+            barraCima.add(abrir);
+            // barraCima.add(salvar);
 
-            botao.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(210, 214, 220)),
-                    BorderFactory.createEmptyBorder(8, 18, 8, 18)
-            ));
+            barraCima.setBorder(
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10)
+            );
 
-            botao.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
+            // Painel da direita
+            JPanel barraInfo = new JPanel(new GridLayout(3, 1));
+            barraInfo.setBackground(new Color(240, 242, 246));
+            barraInfo.setPreferredSize(new Dimension(220, 0));
 
-        barraCima.add(abrir);
-        barraCima.add(salvar);
+            barraInfo.setBorder(
+                    BorderFactory.createEmptyBorder(20, 15, 20, 15)
+            );
 
-        //Painel da Direita
-        JPanel barraInfo = new JPanel();
+            JLabel textoTeste = new JLabel("Informacoes da imagem");
+            textoTeste.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            textoTeste.setForeground(new Color(49, 51, 63));
 
-        barraInfo.setLayout(new GridLayout(3,1));
-        barraInfo.setBackground(Color.white);
+            barraInfo.add(textoTeste);
 
-        JLabel textoTeste = new JLabel("Informacoes da imagem");
+            // Painel da imagem
+            JPanel painelImagem = new JPanel(new BorderLayout());
+            painelImagem.setBackground(Color.WHITE);
 
-        barraInfo.add(textoTeste);
+            JLabel labelImagem = new JLabel();
+            labelImagem.setHorizontalAlignment(SwingConstants.CENTER);
 
+            try {
+                BufferedImage imagem = ImageIO.read(
+                        new File(
+                                "C:\\Users\\ra00359600.PUCSP\\Downloads\\imagem.png"
+                        )
+                );
 
-        //config finais da janela
-        JPanel painelPrincipal = new JPanel(new BorderLayout());
+                if (imagem != null) {
+                    labelImagem.setIcon(new ImageIcon(imagem));
+                } else {
+                    labelImagem.setText("Formato de imagem não reconhecido");
+                }
 
-        painelPrincipal.add(barraCima, BorderLayout.NORTH);
-        // Depois, a imagem entra no CENTER desse painel.
+            } catch (IOException e) {
+                labelImagem.setText("Não foi possível abrir a imagem");
+                e.printStackTrace();
+            }
 
-        janela.add(painelPrincipal, BorderLayout.CENTER);
-        janela.add(barraInfo, BorderLayout.EAST);
+            painelImagem.add(labelImagem, BorderLayout.CENTER);
 
+            // Painel principal: barra em cima e imagem no centro
+            JPanel painelPrincipal = new JPanel(new BorderLayout());
+            painelPrincipal.setBackground(Color.WHITE);
 
-        janela.setVisible(true);
+            painelPrincipal.add(barraCima, BorderLayout.NORTH);
+            painelPrincipal.add(painelImagem, BorderLayout.CENTER);
 
-        // Fundo principal branco e lateral cinza-clara
-        painelPrincipal.setBackground(Color.WHITE);
-        barraInfo.setBackground(new Color(240, 242, 246));
-        barraCima.setBackground(Color.WHITE);
+            // Divisão entre imagem e informações
+            JSplitPane proporcao = new JSplitPane(
+                    JSplitPane.HORIZONTAL_SPLIT,
+                    painelPrincipal,
+                    barraInfo
+            );
 
-        // Largura da lateral
-        barraInfo.setPreferredSize(new Dimension(220, 0));
+            proporcao.setResizeWeight(0.50);
 
-        // Espaço entre o conteúdo e as bordas:
-        // cima, esquerda, baixo, direita
-        barraInfo.setBorder(
-                BorderFactory.createEmptyBorder(20, 15, 20, 15)
-        );
-
-        barraCima.setBorder(
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)
-        );
-
-        // Fonte do texto
-        textoTeste.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-        textoTeste.setForeground(new Color(49, 51, 63));
+            janela.add(proporcao, BorderLayout.CENTER);
+            janela.setVisible(true);
+        });
     }
 }
