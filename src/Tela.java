@@ -62,8 +62,17 @@ public class Tela {
 
         barraInfo.add(textoTeste);
 
+        JLabel textoPixel = new JLabel(
+                "<html>Pixel<br>Passe o mouse sobre a imagem</html>"
+        );
+
+        textoPixel.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        textoPixel.setForeground(new Color(49, 51, 63));
+
+        barraInfo.add(textoPixel);
+
         // Painel da imagem
-        PainelImagem painelImagem = new PainelImagem();
+        PainelImagem painelImagem = new PainelImagem(textoPixel);
 
         abrir.addActionListener(
                 new ButtonAction(janela, painelImagem, textoTeste)

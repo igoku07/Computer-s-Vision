@@ -37,10 +37,19 @@ public class ButtonAction implements ActionListener {
                 if (imagem != null) {
                     painelImagem.setImagem(imagem);
 
-                    InfoImage informacoes = new InfoImage(imagem);
+                    InfoImage informacoes = new InfoImage(imagem, arquivo);
+
+// Protege caracteres do nome para exibição no JLabel com HTML
+                    String nome = informacoes.getNome()
+                            .replace("&", "&amp;")
+                            .replace("<", "&lt;")
+                            .replace(">", "&gt;");
 
                     textoTeste.setText(
                             "<html>Informacoes da imagem<br><br>"
+                                    + "Nome: " + nome + "<br>"
+                                    + "Tamanho: " + informacoes.getTamanho() + "<br>"
+                                    + "Formato: " + informacoes.getFormato() + "<br>"
                                     + "Largura: " + informacoes.getLargura() + " px<br>"
                                     + "Altura: " + informacoes.getAltura() + " px<br>"
                                     + "Dimensões: " + informacoes.getResolucao()
