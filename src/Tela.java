@@ -65,45 +65,9 @@ public class Tela {
         // Painel da imagem
         PainelImagem painelImagem = new PainelImagem();
 
-        abrir.addActionListener(e -> {
-            JFileChooser seletor = new JFileChooser();
-
-            int resultado = seletor.showOpenDialog(janela);
-
-            if (resultado == JFileChooser.APPROVE_OPTION) {
-                File arquivo = seletor.getSelectedFile();
-
-                try {
-                    BufferedImage imagem = ImageIO.read(arquivo);
-
-                    if (imagem != null) {
-                        painelImagem.setImagem(imagem);
-
-                        InfoImage informacoes = new InfoImage(imagem);
-
-                        textoTeste.setText(
-                                "<html>Informacoes da imagem<br><br>"
-                                        + "Largura: " + informacoes.getLargura() + " px<br>"
-                                        + "Altura: " + informacoes.getAltura() + " px<br>"
-                                        + "Dimensões: " + informacoes.getResolucao()
-                                        + "</html>"
-                        );
-                    } else {
-                        JOptionPane.showMessageDialog(
-                                janela,
-                                "Formato de imagem não reconhecido."
-                        );
-                    }
-
-                } catch (IOException erro) {
-                    JOptionPane.showMessageDialog(
-                            janela,
-                            "Não foi possível abrir a imagem."
-                    );
-                    erro.printStackTrace();
-                }
-            }
-        });
+        abrir.addActionListener(
+                new ButtonAction(janela, painelImagem, textoTeste)
+        );
 
         // Painel principal: barra em cima e imagem no centro
         JPanel painelPrincipal = new JPanel(new BorderLayout());
