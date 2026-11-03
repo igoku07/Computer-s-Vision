@@ -69,33 +69,48 @@ public class Tela {
         JLabel labelImagem = new JLabel();
         labelImagem.setHorizontalAlignment(SwingConstants.CENTER);
 
-        try {
-            BufferedImage imagem = ImageIO.read(
-                    new File(
-                            "C:\\Users\\ra00359600.PUCSP\\Downloads\\imagem.png"
-                    )
-            );
+        labelImagem.setText("Clique em Abrir para escolher uma imagem");
 
-            if (imagem != null) {
-                labelImagem.setIcon(new ImageIcon(imagem));
+        abrir.addActionListener(e -> {
+            JFileChooser seletor = new JFileChooser();
 
-                InfoImage informacoes = new InfoImage(imagem);
+            int resultado = seletor.showOpenDialog(janela);
 
-                textoTeste.setText(
-                        "<html>Informacoes da imagem<br><br>"
-                                + "Largura: " + informacoes.getLargura() + " px<br>"
-                                + "Altura: " + informacoes.getAltura() + " px<br>"
-                                + "Dimensões: " + informacoes.getResolucao()
-                                + "</html>"
-                );
-            } else {
-                labelImagem.setText("Formato de imagem não reconhecido");
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                File arquivo = seletor.getSelectedFile();
+
+                try {
+                    BufferedImage imagem = ImageIO.read(arquivo);
+
+                    if (imagem != null) {
+                        labelImagem.setText("");
+                        labelImagem.setIcon(new ImageIcon(imagem));
+
+                        InfoImage informacoes = new InfoImage(imagem);
+
+                        textoTeste.setText(
+                                "<html>Informacoes da imagem<br><br>"
+                                        + "Largura: " + informacoes.getLargura() + " px<br>"
+                                        + "Altura: " + informacoes.getAltura() + " px<br>"
+                                        + "Dimensões: " + informacoes.getResolucao()
+                                        + "</html>"
+                        );
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                janela,
+                                "Formato de imagem não reconhecido."
+                        );
+                    }
+
+                } catch (IOException erro) {
+                    JOptionPane.showMessageDialog(
+                            janela,
+                            "Não foi possível abrir a imagem."
+                    );
+                    erro.printStackTrace();
+                }
             }
-
-        } catch (IOException e) {
-            labelImagem.setText("Não foi possível abrir a imagem");
-            e.printStackTrace();
-        }
+        });
 
         painelImagem.add(labelImagem, BorderLayout.CENTER);
 
