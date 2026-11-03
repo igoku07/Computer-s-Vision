@@ -1,3 +1,13 @@
+/**
+ * Fornece nome, tamanho e formato do arquivo,
+ * além da largura e altura da imagem em pixels.
+ *
+ * @author Felipe Estima Correia Urzi
+ * @author Igor Dias da Silva
+ * @author Pedro Henrique Freire
+ * @author Thierry Nadjarian
+ * @version 20261102
+ */
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

@@ -1,3 +1,13 @@
+/**
+ * Monta a janela principal, o botão de abertura,
+ * o painel da imagem e os campos de informações.
+ *
+ * @author Felipe Estima Correia Urzi
+ * @author Igor Dias da Silva
+ * @author Pedro Henrique Freire
+ * @author Thierry Nadjarian
+ * @version 20261102
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,7 +21,7 @@ public class Tela {
         // Janela principal
         JFrame janela = new JFrame("Visao Computacional");
 
-        janela.setSize(600, 500);
+        janela.setSize(600, 550);
         janela.setLocationRelativeTo(null);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

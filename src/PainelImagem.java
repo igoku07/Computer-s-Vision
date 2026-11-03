@@ -1,3 +1,14 @@
+/**
+ * Exibe a imagem centralizada e ajustada ao painel,
+ * preservando sua proporção. Mostra as coordenadas e
+ * os valores RGB do pixel sob o cursor do mouse.
+ *
+ * @author Felipe Estima Correia Urzi
+ * @author Igor Dias da Silva
+ * @author Pedro Henrique Freire
+ * @author Thierry Nadjarian
+ * @version 20261102
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

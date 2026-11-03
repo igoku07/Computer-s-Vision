@@ -1,3 +1,12 @@
+/**
+ * Inicia a aplicação na thread de eventos do Swing.
+ *
+ * @author Felipe Estima Correia Urzi
+ * @author Igor Dias da Silva
+ * @author Pedro Henrique Freire
+ * @author Thierry Nadjarian
+ * @version 20261102
+ */
 import javax.swing.SwingUtilities;
 
 public class Main {

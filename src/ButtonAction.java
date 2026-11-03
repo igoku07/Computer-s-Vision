@@ -1,3 +1,13 @@
+/**
+ * Trata a ação do botão Abrir, carrega a imagem selecionada
+ * e atualiza sua exibição e suas informações na interface.
+ *
+ * @author Felipe Estima Correia Urzi
+ * @author Igor Dias da Silva
+ * @author Pedro Henrique Freire
+ * @author Thierry Nadjarian
+ * @version 20261102
+ */
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
