@@ -78,6 +78,16 @@ public class Tela {
 
             if (imagem != null) {
                 labelImagem.setIcon(new ImageIcon(imagem));
+
+                InfoImage informacoes = new InfoImage(imagem);
+
+                textoTeste.setText(
+                        "<html>Informacoes da imagem<br><br>"
+                                + "Largura: " + informacoes.getLargura() + " px<br>"
+                                + "Altura: " + informacoes.getAltura() + " px<br>"
+                                + "Dimensões: " + informacoes.getResolucao()
+                                + "</html>"
+                );
             } else {
                 labelImagem.setText("Formato de imagem não reconhecido");
             }
