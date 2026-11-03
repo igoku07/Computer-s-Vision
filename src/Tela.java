@@ -63,13 +63,7 @@ public class Tela {
         barraInfo.add(textoTeste);
 
         // Painel da imagem
-        JPanel painelImagem = new JPanel(new BorderLayout());
-        painelImagem.setBackground(Color.WHITE);
-
-        JLabel labelImagem = new JLabel();
-        labelImagem.setHorizontalAlignment(SwingConstants.CENTER);
-
-        labelImagem.setText("Clique em Abrir para escolher uma imagem");
+        PainelImagem painelImagem = new PainelImagem();
 
         abrir.addActionListener(e -> {
             JFileChooser seletor = new JFileChooser();
@@ -83,8 +77,7 @@ public class Tela {
                     BufferedImage imagem = ImageIO.read(arquivo);
 
                     if (imagem != null) {
-                        labelImagem.setText("");
-                        labelImagem.setIcon(new ImageIcon(imagem));
+                        painelImagem.setImagem(imagem);
 
                         InfoImage informacoes = new InfoImage(imagem);
 
@@ -111,8 +104,6 @@ public class Tela {
                 }
             }
         });
-
-        painelImagem.add(labelImagem, BorderLayout.CENTER);
 
         // Painel principal: barra em cima e imagem no centro
         JPanel painelPrincipal = new JPanel(new BorderLayout());
