@@ -1,6 +1,9 @@
 /**
- * Trata a ação do botão Abrir, carrega a imagem selecionada
- * e atualiza sua exibição e suas informações na interface.
+ * Controlador da ação do botão "Abrir".
+ * Abre o seletor de arquivos do sistema operacional, tenta carregar a imagem
+ * escolhida e, quando a leitura é bem-sucedida, atualiza o painel de exibição
+ * e os dados apresentados na lateral da janela. A classe também trata
+ * arquivos que não são reconhecidos como imagens e falhas de leitura.
  *
  * @author Felipe Estima Correia Urzi
  * @author Igor Dias da Silva
@@ -34,6 +37,7 @@ public class ButtonAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Abre o seletor padrão de arquivos para o usuário escolher uma imagem.
         JFileChooser seletor = new JFileChooser();
 
         int resultado = seletor.showOpenDialog(janela);
@@ -42,11 +46,14 @@ public class ButtonAction implements ActionListener {
             File arquivo = seletor.getSelectedFile();
 
             try {
+                // O ImageIO tenta decodificar o arquivo em uma imagem raster.
                 BufferedImage imagem = ImageIO.read(arquivo);
 
                 if (imagem != null) {
+                    // Atualiza a área de visualização com a imagem recém-carregada.
                     painelImagem.setImagem(imagem);
 
+                    // Centraliza a consulta dos metadados em um objeto InfoImage.
                     InfoImage informacoes = new InfoImage(imagem, arquivo);
 
 // Protege caracteres do nome para exibição no JLabel com HTML

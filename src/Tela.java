@@ -1,6 +1,9 @@
 /**
- * Monta a janela principal, o botão de abertura,
- * o painel da imagem e os campos de informações.
+ * Constrói a janela principal e organiza os componentes da aplicação.
+ *
+ * A tela contém o botão para abrir uma imagem, a área central de visualização
+ * e uma coluna lateral com os metadados do arquivo e os valores do pixel sob
+ * o cursor. A ação do botão é delegada à classe ButtonAction.
  *
  * @author Felipe Estima Correia Urzi
  * @author Igor Dias da Silva
@@ -18,6 +21,7 @@ import javax.imageio.ImageIO;
 public class Tela {
 
     public Tela() {
+        // Janela principal: configura título, tamanho, posição e encerramento.
         // Janela principal
         JFrame janela = new JFrame("Visao Computacional");
 
@@ -57,6 +61,7 @@ public class Tela {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
         );
 
+        // Coluna lateral reservada aos metadados da imagem e aos dados do pixel.
         // Painel da direita
         JPanel barraInfo = new JPanel(new GridLayout(3, 1));
         barraInfo.setBackground(new Color(240, 242, 246));
@@ -81,6 +86,7 @@ public class Tela {
 
         barraInfo.add(textoPixel);
 
+        // Componente central que renderiza a imagem e acompanha o movimento do mouse.
         // Painel da imagem
         PainelImagem painelImagem = new PainelImagem(textoPixel);
 

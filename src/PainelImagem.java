@@ -1,7 +1,10 @@
 /**
- * Exibe a imagem centralizada e ajustada ao painel,
- * preservando sua proporção. Mostra as coordenadas e
- * os valores RGB do pixel sob o cursor do mouse.
+ * Componente visual responsável por desenhar a imagem selecionada.
+ *
+ * A imagem é ajustada ao espaço disponível sem deformar sua proporção e
+ * centralizada no painel. Os eventos do mouse são convertidos de coordenadas
+ * do painel para coordenadas da imagem original, permitindo apresentar a
+ * posição (X, Y) e os componentes de cor RGB do pixel apontado.
  *
  * @author Felipe Estima Correia Urzi
  * @author Igor Dias da Silva
@@ -47,6 +50,7 @@ public class PainelImagem extends JPanel {
         });
     }
 
+    // Recebe a nova imagem, reinicia os dados do pixel e solicita redesenho.
     public void setImagem(BufferedImage imagem) {
         this.imagem = imagem;
         limparPixel();
@@ -79,6 +83,7 @@ public class PainelImagem extends JPanel {
         return new Rectangle(x, y, largura, altura);
     }
 
+    // Atualiza o rótulo lateral com as coordenadas e a cor do pixel apontado.
     private void mostrarPixel(int mouseX, int mouseY) {
         Rectangle area = calcularAreaImagem();
 
@@ -110,6 +115,7 @@ public class PainelImagem extends JPanel {
     }
 
     @Override
+    // Método de pintura do Swing: desenha a imagem preservando a proporção.
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
